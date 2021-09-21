@@ -3,15 +3,18 @@
 *So, whether you eat or drink, or whatever you do, do all to the glory of God. (1 Corinthians 10:31)*
 
 ## The problem   
-"Given the historical sales time-series for a subset of the martketplace's listings, we challenge you to predict how long will it take for a given item to run out of stock."     
+*"Given the historical sales time-series for a subset of the martketplace's listings, we challenge you to predict how long will it take for a given item to run out of stock."*     
 
-So we had to output a probability distribution for each SKU, going from 1 to 30 days.   
+So we had to output a probability distribution for each SKU, going from 1 to 30 days. 
+
+### Who participated?
+There was 162 competitors from Argentina, Brazil, Chile, Colombia, Mexico and Uruguay.
 
 
 ## The solution    
 I turned it into a classification problem, reshaping the data in such a way that
 each SKU had only one row.    
-I averaged the predictions from a LGBM model and a very simple Neural Network, that gave me 3.77443 in Private Leaderboard (6th place from 162 competitors).    
+I averaged the predictions from a LGBM model and a very simple Neural Network, that gave me 3.77443 in Private Leaderboard (6th place).    
      
 
 | Model     	    | Public LB 	| Private LB 	|
@@ -22,7 +25,7 @@ I averaged the predictions from a LGBM model and a very simple Neural Network, t
 
 
 
-## Feature Engineering    
+### Feature Engineering    
 Instead of using `current_price`, I used it as a percentage change of price (I called it `pct_change`), because the currencies were different (Brazil, Mexico and Argentina).   
 I created a binary feature called `has_zero_sold` as well.
 
