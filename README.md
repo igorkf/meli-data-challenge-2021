@@ -20,7 +20,7 @@ I averaged the predictions from a LGBM model and a very simple Neural Network, t
 
 
 
-### Feature Engineering    
+## Feature Engineering    
 Instead of using `current_price`, I used it as a percentage change of price (I called it `pct_change`), because the currencies were different (Brazil, Mexico and Argentina).   
 I created a binary feature called `has_zero_sold` as well.
 
@@ -39,6 +39,12 @@ I started to watch some tips from Giba in [this video](https://www.youtube.com/w
 After applying LOFO, I reduced from ~100 features to 40 features and even got a small improvement on CV.    
 
 For the LGBM model I used raw data and for NN I used standardized features, imputing NAs with zeros.
+
+## Some insights
+- Tuning LGBM model with Optuna decreased the difference between training and validation loss (in this case multilog loss), but the RPS stayed almost the same.   
+
+- In the beginning I was creating weekly features and this was giving me ~4.03 in Public LB. After changing to rolling windows, the score improved to ~3.86. 
+
 
 ## Reproducting    
 To reproduce the solution, you must have the following files provided by MeLi:
