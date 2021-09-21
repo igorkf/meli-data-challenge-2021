@@ -57,6 +57,9 @@ To reproduce the solution, you must have the following files provided by MeLi:
 - train_data.parquet
 - items_static_metadata.jl
 
+*Disclaimer: the data can be downloaded [here](https://ml-challenge.mercadolibre.com/downloads), but maybe after some time 
+this link may change or disappear.*    
+
 Now run the following steps:
 
 1 - Run `1 - Preprocessing.ipynb` to preprocess the data and generate datasets.
@@ -69,5 +72,5 @@ Now run the following steps:
 
 5 - Run `3.2 - Train Neural Net, two layers (16, 16).ipynb` to train another different Neural Network and save out of fold predictions and the submission file.
 
-6 - Run `4 - Average predictions.ipynb` to combine the predictions. This will generate the submission file called `4-average_predictions-2-tuned-lgbm-3.2-nn-two-layers-16-16-weights-052-048.csv`.
+6 - Run `4 - Average predictions.ipynb` to combine the predictions. This will generate the submission file called `4-average_predictions-2-tuned-lgbm-3.2-nn-two-layers-16-16-weights-052-048.csv.gz`.
 
