@@ -1,5 +1,7 @@
 # MeLi Data Challenge 2021
 
+*So, whether you eat or drink, or whatever you do, do all to the glory of God. (1 Corinthians 10:31)*
+
 ## The problem   
 "Given the historical sales time-series for a subset of the martketplace's listings, we challenge you to predict how long will it take for a given item to run out of stock."     
 
@@ -12,11 +14,11 @@ each SKU had only one row.
 I averaged the predictions from a LGBM model and a very simple Neural Network, that gave me 3.77443 in Private Leaderboard (6th place from 162 competitors).    
      
 
-| Model     	| Public LB 	| Private LB 	|
-|-----------	|-----------	|------------	|
-| LGBM      	| ~3.78     	| -          	|
-| Simple NN 	| ~3.80     	| -          	|
-| Average   	| ~3.76937  	| ~3.77443   	|
+| Model     	    | Public LB 	| Private LB 	|
+|-------------------|---------------|---------------|
+| LGBM      	    | ~3.78     	|           	|
+| Simple NN 	    | ~3.80     	|           	|
+| Weight Average   	| ~3.76937  	| ~3.77443   	|
 
 
 
@@ -43,7 +45,9 @@ For the LGBM model I used raw data and for NN I used standardized features, impu
 ## Some insights
 - Tuning LGBM model with Optuna decreased the difference between training and validation loss (in this case multilog loss), but the RPS stayed almost the same.   
 
-- In the beginning I was creating weekly features and this was giving me ~4.03 in Public LB. After changing to rolling windows, the score improved to ~3.86. 
+- In the beginning I was creating week features and this was giving me ~4.03 in Public LB. After changing to rolling windows, the score improved to ~3.86. 
+
+- When adding rolling counts for the categorical features (trying to capture changes of logistic status along the days for each SKU), scores improved from ~3.86 to ~3.80. 
 
 
 ## Reproducting    
