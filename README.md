@@ -18,7 +18,7 @@ I averaged the predictions from a LGBM model and a very simple Neural Network, t
 |-------------------|---------------|---------------|
 | LGBM      	    | ~3.78     	|           	|
 | Simple NN 	    | ~3.80     	|           	|
-| Weight Average   	| ~3.76937  	| ~3.77443   	|
+| Weighted Average	| ~3.76937  	| ~3.77443   	|
 
 
 
