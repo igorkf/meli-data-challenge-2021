@@ -13,8 +13,36 @@ There was 162 competitors from Argentina, Brazil, Chile, Colombia, Mexico and Ur
 
 ## The solution    
 I turned it into a classification problem, reshaping the data in such a way that
-each SKU had only one row.    
-I averaged the predictions from a LGBM model and a very simple Neural Network, that gave me 3.77443 in Private Leaderboard (6th place).    
+each SKU had only one row.
+
+Original data:
+| sku 	| date       	| sold_quantity 	|
+|-----	|------------	|---------------	|
+| 1   	| 2021-01-01 	| 1             	|
+| 1   	| 2021-01-02 	| 4             	|
+| 1   	| 2021-01-03 	| 0             	|
+| 1   	| 2021-01-04 	| 3             	|
+| ... 	| ...        	| ...             	|
+| 1     | 2021-02-01    | 6                 |
+| 4   	| 2021-01-01 	| 0             	|
+| 4   	| 2021-01-02 	| 3             	|
+| 4   	| 2021-01-03 	| 1             	|
+| 4   	| 2021-01-04 	| 5             	|
+| ... 	| ...        	| ...              	|
+| 4 	| 2021-02-01  	| 2              	|
+
+Reshaped data:
+| sku 	| sold_quantity_30 	| ... 	| sold_quantity_4 	| sold_quantity_3 	| sold_quantity_2 	| sold_quantity_1 	|
+|-----	|------------------	|-----	|-----------------	|-----------------	|-----------------	|-----------------	|
+| 1   	| 6                	| ... 	| 3               	| 0               	| 4               	| 1               	|
+| 4   	| 2                	| ... 	| 5               	| 1               	| 3               	| 0               	|
+| ... 	| ...              	| ... 	| ...             	| ...             	| ...             	| ...             	|
+
+The same idea was used for the other features.  
+
+
+
+In the end I averaged the predictions from a LGBM model and a very simple Neural Network, that gave me 3.77443 in Private Leaderboard (6th place).    
      
 
 | Model     	    | Public LB 	| Private LB 	|
@@ -26,7 +54,7 @@ I averaged the predictions from a LGBM model and a very simple Neural Network, t
 
 
 ### Feature Engineering    
-Instead of using `current_price`, I used it as a percentage change of price (I called it `pct_change`), because the currencies were different (Brazil, Mexico and Argentina).   
+Instead of using the raw `current_price`, I used it as a percentage change of price, because the currencies were different (Brazil, Mexico and Argentina).   
 I created a binary feature called `has_zero_sold` as well.
 
 Then I created some features using lag and rolling windows:
@@ -37,9 +65,10 @@ Then I created some features using lag and rolling windows:
 
 - Rolling sum (count) for `has_zero_sold` and for the different categorical features (`listing_type`, `shipping_logistic_type`, `shipping_payment`)
 
-For those rolling window features, I used window size of 19 days, keeping only the the 7 last windows: (30, 11), (29, 10), (28, 9), (27, 8), (26, 7), (24, 5), (23, 4).
+For those rolling window features, I used window size of 19 days, keeping only the 7 last windows: `(30, 11), (29, 10), (28, 9), (27, 8), (26, 7), (25, 6), (24, 5)`.    
+As the data is reshaped, the rolling window calculations are made in the columns, not in the rows. 
 
-At this time I was with ~100 features and was looking for some tips.        
+At this time I was with ~100 features and was looking for some tips.           
 I started to watch some tips from Giba in [this video](https://www.youtube.com/watch?v=RtqtM1UJfZc) and saw a method called LOFO (Leave One Feature Out).   
 After applying LOFO, I reduced from ~100 features to 40 features and even got a small improvement on CV.    
 
