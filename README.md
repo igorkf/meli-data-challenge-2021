@@ -61,7 +61,7 @@ Then I created some features using lag and rolling windows:
 
 - Lag for `sold_quantity` and `minutes_active`
 
-- Rolling mean for `sold_quantity`, `minutes_active` and `pct_change` 
+- Rolling mean for `sold_quantity`, `minutes_active` and `current_price` 
 
 - Rolling sum (count) for `has_zero_sold` and for the different categorical features (`listing_type`, `shipping_logistic_type`, `shipping_payment`)
 
