@@ -8,7 +8,7 @@
 So we had to output a probability distribution for each SKU, going from 1 to 30 days. 
 
 ### Who participated?
-There was 162 competitors from Argentina, Brazil, Chile, Colombia, Mexico and Uruguay.
+There were 162 competitors from Argentina, Brazil, Chile, Colombia, Mexico and Uruguay.
 
 
 ## The solution    
